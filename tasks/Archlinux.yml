@@ -1,0 +1,10 @@
+- name: get libreswan package
+  become: no
+  git: repo=https://aur.archlinux.org/libreswan.git dest=/tmp/libreswan
+
+- name: build the package
+  become: no
+  shell: cd /tmp/libreswan && makepkg -s creates=/tmp/libreswan/libreswan-3.21-1-x86_64.pkg.tar.xz
+
+- name: install the package
+  pacman: name=/tmp/libreswan/libreswan-3.21-1-x86_64.pkg.tar.xz
